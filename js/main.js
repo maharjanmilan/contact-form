@@ -34,8 +34,31 @@
             showValidate(message);
             check=false;
         }
+        if(!check)
+            return false;
 
-        return check;
+        $('#submit-loader').show();
+        $.ajax({
+            url: "https://script.google.com/macros/s/AKfycbxuSCQS7maeU-2N3E7T0fgqGlby5bGOEmLSvmh2/exec",
+            method: "POST",
+            dataType: "json",
+            data: $(".contact1-form").serialize(),
+            success: function(response) {
+                $('#submit-loader').hide();
+                if(response.result == "success") {
+                    $('.contact1-form')[0].reset();
+                    alert('Thank you for contacting us.');
+                    return true;
+                }
+                else {
+                    alert("Something went wrong. Please try again.")
+                }
+            },
+            error: function() {
+                $('#submit-loader').hide();
+                alert("Something went wrong. Please try again.")
+            }
+        })
     });
 
 
