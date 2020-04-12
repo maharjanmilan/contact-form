@@ -11,7 +11,7 @@
     var message = $('.validate-input textarea[name="message"]');
 
 
-    $('.validate-form').on('submit',function(){
+    $('.validate-form').on('submit',function(e){
         var check = true;
 
         if($(name).val().trim() == ''){
@@ -37,6 +37,7 @@
         if(!check)
             return false;
 
+        e.preventDefault();
         $('#submit-loader').show();
         $.ajax({
             url: "https://script.google.com/macros/s/AKfycbxuSCQS7maeU-2N3E7T0fgqGlby5bGOEmLSvmh2/exec",
